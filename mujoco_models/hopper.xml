@@ -1,0 +1,36 @@
+<mujoco model="two_point_masses">
+  <compiler angle="degree"/>
+  <option timestep="0.01" gravity="0 0 -9.81"/>
+  
+  <!-- Default properties -->
+  <default>
+    <joint damping="1"/>
+    <geom density="1000" friction="1 0.5 0.5" margin="0.002"/>
+  </default>
+  
+  <worldbody>
+    <!-- A ground plane -->
+    <geom name="floor" type="plane" pos="0 0 0" size="10 10 0.1" rgba="0.3 0.3 0.3 1"/>
+    
+    <!-- First point mass (red) with a free joint -->
+    <body name="mass1" pos="0 0 1">
+      <joint name="mass1_free" type="free"/>
+      <geom name="mass1_geom" type="sphere" size="0.05" rgba="1 0 0 1"/>
+    </body>
+    
+    <!-- Second point mass (blue) with a free joint -->
+    <body name="mass2" pos="0 0 0.5">
+      <joint name="mass2_free" type="free"/>
+      <geom name="mass2_geom" type="sphere" size="0.05" rgba="0 0 1 1"/>
+    </body>
+    
+    <!-- Visual rod connecting the two masses.
+         The "fromto" attribute is set initially using the starting positions
+         of mass1 (at 0,0,1) and mass2 (at 0,0,0.5). -->
+    <!-- <geom name="rod" type="capsule" fromto="0 0 1  0 0 0.5" size="0.01" rgba="0.7 0.7 0.7 1"/> -->
+  </worldbody>
+  
+  <visual>
+    <headlight ambient="0.3 0.3 0.3" diffuse="1 1 1"/>
+  </visual>
+</mujoco>
